@@ -49,6 +49,11 @@ client.on("interactionCreate", async (interaction) => {
       if (!spellName || !spellName.value) return;
       const spell = await searchSpell(spellName.value);
 
+      if (Object.keys(spell).length == 0)
+        return await interaction.reply(
+          `My bot brain isn't big enough to find ${spellName.value}, sorry!`
+        );
+
       await interaction.reply(
         `Basic description of ${spell.name}: ${spell.desc[0]}`
       );
